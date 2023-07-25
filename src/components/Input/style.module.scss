@@ -1,0 +1,16 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  margin: 32px 0;
+
+  svg {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    margin: auto 0;
+    width: 16px;
+    height: 16px
+  }
+}
