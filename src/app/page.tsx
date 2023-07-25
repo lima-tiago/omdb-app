@@ -1,19 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Input, EmptyScreen, MoviesList } from '@/components';
+import { Input, EmptyScreen, MoviesList, GlobalLoading } from '@/components';
 import { MoviesResponse, getMovies } from '@/services';
 import IconSearch from '@/assets/fe_search.svg';
 
 export default function Home() {
   const [searchMovies, setSearchMovies] = useState('');
   const [movies, setMovies] = useState<MoviesResponse>();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const waitUser = setTimeout(() => {
       if (searchMovies) {
-        getMovies(`s=${searchMovies}`).then((res) => setMovies(res));
+        setIsLoading(true);
+        getMovies(`s=${searchMovies}`).then((res) => {
+          setIsLoading(false);
+          setMovies(res);
+        });
       }
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(waitUser);
   }, [searchMovies]);
@@ -28,10 +33,16 @@ export default function Home() {
         value={searchMovies}
         onChange={(e) => setSearchMovies(e.target.value)}
       />
-      {movies?.Search?.length ? (
-        <MoviesList movies={movies?.Search} />
+      {isLoading ? (
+        <GlobalLoading />
       ) : (
-        <EmptyScreen />
+        <>
+          {movies?.Search?.length ? (
+            <MoviesList movies={movies?.Search} />
+          ) : (
+            <EmptyScreen />
+          )}
+        </>
       )}
     </main>
   );
