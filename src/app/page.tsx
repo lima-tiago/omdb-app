@@ -19,7 +19,7 @@ export default function Home() {
   }, [searchMovies]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center container m-auto">
+    <main className="flex min-h-screen flex-col items-center container m-auto py-4 px-4">
       <Input
         type="text"
         className="w-full rounded-lg p-2 pl-8"

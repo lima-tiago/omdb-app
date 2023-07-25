@@ -40,7 +40,7 @@ export default function MovieDetail() {
   }, [params?.id]);
 
   return (
-    <main className="flex min-h-screen flex-col container m-auto py-14">
+    <main className="flex min-h-screen flex-col container m-auto py-14 px-4">
       <div
         className="rounded-lg hover:bg-opacity-60 bg-opacity-0 bg-gray cursor-pointer w-max"
         onClick={() => route.back()}
@@ -56,10 +56,12 @@ export default function MovieDetail() {
         </p>
       </div>
 
-      <div className="flex mt-4">
-        <div className="w-[65%] text-white pr-10">
-          <h1 className="text-6xl line-clamp-2 font-bold">{movie?.Title}</h1>
-          <div className="flex my-4 w-max">
+      <div className="flex mt-4 flex-col-reverse sm:flex-row">
+        <div className="w-full sm:w-[65%] text-white sm:pr-10 my-4">
+          <h1 className="text-3xl sm:text-6xl line-clamp-2 font-bold">
+            {movie?.Title}
+          </h1>
+          <div className="flex my-4 w-max flex-wrap max-w-full">
             {raters.map((rater) => {
               const raterFiltered = movie?.Ratings.find(
                 (rate) => rate.Source === rater.rater,
@@ -67,7 +69,7 @@ export default function MovieDetail() {
               if (raterFiltered) {
                 return (
                   <div
-                    className="flex rounded-md border border-solid border-[#171C21] min-w-[130px] w-max place-items-center overflow-hidden mr-4"
+                    className="flex rounded-md border border-solid border-[#171C21] min-w-[130px] w-max place-items-center overflow-hidden mr-4 mb-2"
                     key={rater.rater}
                   >
                     <div
@@ -80,7 +82,7 @@ export default function MovieDetail() {
                 );
               }
             })}
-            <button className="flex rounded-md border border-solid border-[#171C21] w-max place-items-center p-3">
+            <button className="flex rounded-md border border-solid border-[#171C21] w-max place-items-center p-3 mb-2">
               <HeartIcon className="fill-gray mr-2" />
               <p className="text-gray">Add to favorites</p>
             </button>
@@ -89,7 +91,7 @@ export default function MovieDetail() {
           <p className="text-gray mt-8 mb-2">Plot</p>
           <p>{movie?.Plot}</p>
 
-          <div className="grid grid-cols-3 mt-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-8">
             <div>
               <p className="text-gray mb-2">Cast</p>
               {movie?.Actors?.split(',')?.map((actor) => (
@@ -110,13 +112,13 @@ export default function MovieDetail() {
             </div>
           </div>
         </div>
-        <div className="w-[35%]">
+        <div className="w-full sm:w-[35%]">
           <img
             src={movie?.Poster}
             alt={movie?.Title}
             width={360}
             height={508}
-            className="object-contain w-full h-full flex ml-auto"
+            className="object-contain w-full h-full flex ml-auto rounded-lg"
           />
         </div>
       </div>

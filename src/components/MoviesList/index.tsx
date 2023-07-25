@@ -13,7 +13,7 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
       {movies?.map((movie) => (
         <Link
           href={`/detail/${movie.imdbID}`}
-          className="w-36 relative rounded-lg overflow-hidden"
+          className="w-36 h-48 relative rounded-lg overflow-hidden bg-gray"
           key={movie.imdbID}
         >
           <img
@@ -22,6 +22,7 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
             width={140}
             height={190}
             loading="lazy"
+            className="w-full h-full object-cover"
           />
           <div className="absolute top-0 left-0 z-10 bg-[#192228] bg-opacity-90 w-full h-full justify-end flex flex-col p-2 opacity-0 hover:opacity-100 transition-opacity">
             <button className="absolute top-2 right-2">
