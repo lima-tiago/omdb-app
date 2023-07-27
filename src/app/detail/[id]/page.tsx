@@ -61,8 +61,17 @@ export default function MovieDetail() {
   useEffect(() => {
     if (params?.id) {
       setIsLoading(true);
-      getMovies(`i=${params?.id}`).then((res) => {
-        setMovie(res);
+      getMovies(`
+        {
+          allMoviedetaileds(filter: {id: {eq: "${params?.id}"}}) {
+            id
+            moviedetail
+          }
+        }
+      `).then((res) => {
+        if (res?.data?.allMoviedetaileds?.length) {
+          setMovie(res?.data?.allMoviedetaileds[0].moviedetail);
+        }
         setIsLoading(false);
       });
     }

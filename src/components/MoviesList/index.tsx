@@ -40,27 +40,35 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
       {movies?.map((movie) => (
         <div
           className="w-36 h-48 relative rounded-lg overflow-hidden bg-gray group"
-          key={movie.imdbID}
+          key={movie?.id}
         >
-          <Link href={`/detail/${movie.imdbID}`}>
+          <Link href={`/detail/${movie?.id}`}>
             <img
-              src={movie.Poster}
-              alt={movie.Title}
+              src={movie?.moviedetail.Poster}
+              alt={movie?.moviedetail.Title}
               width={140}
               height={190}
               loading="lazy"
               className="w-full h-full object-cover"
             />
             <div className="absolute top-0 left-0 z-10 bg-[#192228] bg-opacity-90 w-full h-full justify-end flex flex-col p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <p className="text-white line-clamp-2 text-xs">{movie.Title}</p>
-              <span className="text-gray text-xs">{movie.Year}</span>
+              <p className="text-white line-clamp-2 text-xs">
+                {movie?.moviedetail.Title}
+              </p>
+              <span className="text-gray text-xs">
+                {movie?.moviedetail.Year}
+              </span>
             </div>
           </Link>
           <button
             className="absolute top-2 right-2 z-10"
-            onClick={() => handleFavoriteMovie(movie.imdbID)}
+            onClick={() => handleFavoriteMovie(movie?.moviedetail.imdbID)}
           >
-            {favorites.includes(movie.imdbID) ? <HeartFilled /> : <Heart />}
+            {favorites.includes(movie?.moviedetail.imdbID) ? (
+              <HeartFilled />
+            ) : (
+              <Heart />
+            )}
           </button>
         </div>
       ))}

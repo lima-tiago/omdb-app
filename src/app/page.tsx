@@ -13,9 +13,16 @@ export default function Home() {
     const waitUser = setTimeout(() => {
       if (searchMovies) {
         setIsLoading(true);
-        getMovies(`s=${searchMovies}`).then((res) => {
+        getMovies(`
+          {
+            allMoviedetaileds {
+              id
+              moviedetail
+            }
+          }
+        `).then((res) => {
           setIsLoading(false);
-          setMovies(res);
+          setMovies(res?.data);
         });
       }
     }, 1000);
@@ -37,8 +44,8 @@ export default function Home() {
         <GlobalLoading />
       ) : (
         <>
-          {movies?.Search?.length ? (
-            <MoviesList movies={movies?.Search} />
+          {movies?.allMoviedetaileds?.length ? (
+            <MoviesList movies={movies?.allMoviedetaileds} />
           ) : (
             <EmptyScreen />
           )}
