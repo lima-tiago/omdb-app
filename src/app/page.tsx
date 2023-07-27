@@ -47,7 +47,7 @@ export default function Home() {
           {movies?.allMoviedetaileds?.length ? (
             <MoviesList movies={movies?.allMoviedetaileds} />
           ) : (
-            <EmptyScreen />
+            <EmptyScreen setSearchMovies={setSearchMovies} />
           )}
         </>
       )}
