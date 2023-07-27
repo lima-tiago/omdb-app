@@ -7,7 +7,7 @@ import ArrowLeft from '@/assets/ArrowLeft.svg';
 import ImdbLogo from '@/assets/ImdbLogo.svg';
 import RottenLogo from '@/assets/RottenLogo.svg';
 import MetacriticLogo from '@/assets/MetacriticLogo.svg';
-import HeartIcon from '@/assets/Heart.svg';
+import HeartIcon from '@/assets/heart.svg';
 import HeartFilled from '@/assets/HeartFilled.svg';
 import { GlobalLoading } from '@/components';
 
