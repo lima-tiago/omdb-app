@@ -2,7 +2,7 @@
 import { MoviesListResponse } from '@/services';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Heart from '@/assets/Heart.svg';
+import Heart from '@/assets/heart.svg';
 import HeartFilled from '@/assets/HeartFilled.svg';
 
 type MoviesListProps = {
