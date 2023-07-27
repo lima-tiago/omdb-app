@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Input, EmptyScreen, MoviesList, GlobalLoading } from '@/components';
 import { MoviesResponse, getMovies } from '@/services';
-import IconSearch from '@/assets/fe_search.svg';
+import IconSearch from '@/assets/FeSearch.svg';
 
 export default function Home() {
   const [searchMovies, setSearchMovies] = useState('');

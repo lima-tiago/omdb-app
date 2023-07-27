@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { MoviesListResponse } from '@/services';
 import Link from 'next/link';
-import Heart from '@/assets/heart.svg';
+import Heart from '@/assets/Heart.svg';
 
 type MoviesListProps = {
   movies?: MoviesListResponse[];
@@ -9,7 +9,10 @@ type MoviesListProps = {
 
 export const MoviesList = ({ movies }: MoviesListProps) => {
   return (
-    <div className="w-full grid place-items-center grid-cols-[repeat(auto-fit,_minmax(140px,_1fr))] gap-4">
+    <div
+      className="w-full grid place-items-center grid-cols-[repeat(auto-fit,_minmax(140px,_1fr))] gap-4"
+      data-testid="list-movies"
+    >
       {movies?.map((movie) => (
         <Link
           href={`/detail/${movie.imdbID}`}

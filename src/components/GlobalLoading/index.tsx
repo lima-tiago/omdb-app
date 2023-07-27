@@ -1,4 +1,4 @@
-import LoadingIcon from '@/assets/loading_icon.svg';
+import LoadingIcon from '@/assets/LoadingIcon.svg';
 
 export const GlobalLoading = () => {
   return (

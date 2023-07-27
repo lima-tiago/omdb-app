@@ -1,4 +1,4 @@
-import EmptyImage from '@/assets/empty_screen.svg';
+import EmptyImage from '@/assets/EmptyScreen.svg';
 
 export const EmptyScreen = () => {
   return (
