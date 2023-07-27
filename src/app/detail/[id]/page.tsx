@@ -8,6 +8,7 @@ import ImdbLogo from '@/assets/ImdbLogo.svg';
 import RottenLogo from '@/assets/RottenLogo.svg';
 import MetacriticLogo from '@/assets/MetacriticLogo.svg';
 import HeartIcon from '@/assets/Heart.svg';
+import HeartFilled from '@/assets/HeartFilled.svg';
 import { GlobalLoading } from '@/components';
 
 export default function MovieDetail() {
@@ -35,6 +36,28 @@ export default function MovieDetail() {
     ];
   }, []);
 
+  const [favorites, setFavorites] = useState<Array<string>>([]);
+
+  function handleFavoriteMovie(movieId: string) {
+    const isFavorited = favorites.includes(movieId);
+    if (!isFavorited) {
+      setFavorites([...favorites, movieId]);
+      localStorage.setItem(
+        'favorites',
+        JSON.stringify([...favorites, movieId]),
+      );
+    } else {
+      const favoritesFiltered = favorites.filter((item) => item !== movieId);
+      setFavorites(favoritesFiltered);
+      localStorage.setItem('favorites', JSON.stringify(favoritesFiltered));
+    }
+  }
+
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) setFavorites(JSON.parse(savedFavorites));
+  }, []);
+
   useEffect(() => {
     if (params?.id) {
       setIsLoading(true);
@@ -50,7 +73,7 @@ export default function MovieDetail() {
       className="flex min-h-screen flex-col container m-auto py-14 px-4"
       data-testid="detail-wrapper"
     >
-      {isLoading ? (
+      {isLoading || !movie ? (
         <GlobalLoading />
       ) : (
         <>
@@ -96,8 +119,15 @@ export default function MovieDetail() {
                     );
                   }
                 })}
-                <button className="flex rounded-md border border-solid border-[#171C21] w-max place-items-center p-3 mb-2">
-                  <HeartIcon className="fill-gray mr-2" />
+                <button
+                  className="flex rounded-md border border-solid border-[#171C21] w-max place-items-center p-3 mb-2"
+                  onClick={() => handleFavoriteMovie(movie.imdbID)}
+                >
+                  {favorites.includes(movie.imdbID) ? (
+                    <HeartFilled className="fill-gray mr-2" />
+                  ) : (
+                    <HeartIcon className="fill-gray mr-2" />
+                  )}
                   <p className="text-gray">Add to favorites</p>
                 </button>
               </div>
