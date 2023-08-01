@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { MoviesListResponse } from '@/services';
+import { DetailedMovieResponse } from '@/services';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Heart from '@/assets/heart.svg';
 import HeartFilled from '@/assets/HeartFilled.svg';
 
 type MoviesListProps = {
-  movies?: MoviesListResponse[];
+  movies?: DetailedMovieResponse[];
 };
 
 export const MoviesList = ({ movies }: MoviesListProps) => {
@@ -34,7 +34,7 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
 
   return (
     <div
-      className="w-full grid place-items-center grid-cols-[repeat(auto-fit,_minmax(140px,_1fr))] gap-4"
+      className="w-full grid place-items-center grid-cols-[repeat(auto-fit,_140px)] gap-4"
       data-testid="list-movies"
     >
       {movies?.map((movie) => (
@@ -44,31 +44,23 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
         >
           <Link href={`/detail/${movie?.id}`}>
             <img
-              src={movie?.moviedetail.Poster}
-              alt={movie?.moviedetail.Title}
+              src={movie?.poster}
+              alt={movie?.title}
               width={140}
               height={190}
               loading="lazy"
               className="w-full h-full object-cover"
             />
             <div className="absolute top-0 left-0 z-10 bg-[#192228] bg-opacity-90 w-full h-full justify-end flex flex-col p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <p className="text-white line-clamp-2 text-xs">
-                {movie?.moviedetail.Title}
-              </p>
-              <span className="text-gray text-xs">
-                {movie?.moviedetail.Year}
-              </span>
+              <p className="text-white line-clamp-2 text-xs">{movie?.title}</p>
+              <span className="text-gray text-xs">{movie?.year}</span>
             </div>
           </Link>
           <button
             className="absolute top-2 right-2 z-10"
-            onClick={() => handleFavoriteMovie(movie?.moviedetail.imdbID)}
+            onClick={() => handleFavoriteMovie(movie?.imdbID)}
           >
-            {favorites.includes(movie?.moviedetail.imdbID) ? (
-              <HeartFilled />
-            ) : (
-              <Heart />
-            )}
+            {favorites.includes(movie?.imdbID) ? <HeartFilled /> : <Heart />}
           </button>
         </div>
       ))}

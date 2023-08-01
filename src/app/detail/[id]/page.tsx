@@ -63,14 +63,24 @@ export default function MovieDetail() {
       setIsLoading(true);
       getMovies(`
         {
-          allMoviedetaileds(filter: {id: {eq: "${params?.id}"}}) {
+          newmovie(filter: {id: {eq: "${params?.id}"}}) {
+            actors
+            director
+            genre
             id
-            moviedetail
+            imdbid
+            plot
+            poster
+            rated
+            ratings
+            runtime
+            title
+            year
           }
         }
       `).then((res) => {
-        if (res?.data?.allMoviedetaileds?.length) {
-          setMovie(res?.data?.allMoviedetaileds[0].moviedetail);
+        if (res?.data?.newmovie) {
+          setMovie(res?.data?.newmovie);
         }
         setIsLoading(false);
       });
@@ -95,9 +105,9 @@ export default function MovieDetail() {
           </div>
           <div className="flex text-gray items-center my-2">
             <p>
-              {movie?.Runtime} • {movie?.Year} •{' '}
+              {movie?.runtime} • {movie?.year} •{' '}
               <span className="rounded-md p-1 text-xs bg-gray text-black">
-                {movie?.Rated}
+                {movie?.rated}
               </span>
             </p>
           </div>
@@ -105,11 +115,11 @@ export default function MovieDetail() {
           <div className="flex mt-4 flex-col-reverse sm:flex-row">
             <div className="w-full sm:w-[65%] text-white sm:pr-10 my-4">
               <h1 className="text-3xl sm:text-6xl line-clamp-2 font-bold">
-                {movie?.Title}
+                {movie?.title}
               </h1>
               <div className="flex my-4 w-max flex-wrap max-w-full">
                 {raters.map((rater) => {
-                  const raterFiltered = movie?.Ratings.find(
+                  const raterFiltered = movie?.ratings?.find(
                     (rate) => rate.Source === rater.rater,
                   );
                   if (raterFiltered) {
@@ -142,24 +152,24 @@ export default function MovieDetail() {
               </div>
 
               <p className="text-gray mt-8 mb-2">Plot</p>
-              <p>{movie?.Plot}</p>
+              <p>{movie?.plot}</p>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-8">
                 <div>
                   <p className="text-gray mb-2">Cast</p>
-                  {movie?.Actors?.split(',')?.map((actor) => (
+                  {movie?.actors?.split(',')?.map((actor) => (
                     <p key={actor}>{actor}</p>
                   ))}
                 </div>
                 <div>
                   <p className="text-gray mb-2">Genre</p>
-                  {movie?.Genre?.split(',')?.map((genre) => (
+                  {movie?.genre?.split(',')?.map((genre) => (
                     <p key={genre}>{genre}</p>
                   ))}
                 </div>
                 <div>
                   <p className="text-gray mb-2">Director</p>
-                  {movie?.Director?.split(',')?.map((director) => (
+                  {movie?.director?.split(',')?.map((director) => (
                     <p key={director}>{director}</p>
                   ))}
                 </div>
@@ -167,8 +177,8 @@ export default function MovieDetail() {
             </div>
             <div className="w-full sm:w-[35%]">
               <img
-                src={movie?.Poster}
-                alt={movie?.Title}
+                src={movie?.poster}
+                alt={movie?.title}
                 width={360}
                 height={508}
                 className="object-contain w-full h-full flex ml-auto rounded-lg"

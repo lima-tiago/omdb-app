@@ -1,12 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Input, EmptyScreen, MoviesList, GlobalLoading } from '@/components';
-import { MoviesResponse, getMovies } from '@/services';
+import { DetailedMovieResponse, getMovies } from '@/services';
 import IconSearch from '@/assets/FeSearch.svg';
 
 export default function Home() {
   const [searchMovies, setSearchMovies] = useState('');
-  const [movies, setMovies] = useState<MoviesResponse>();
+  const [movies, setMovies] = useState<Array<DetailedMovieResponse>>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -15,14 +15,17 @@ export default function Home() {
         setIsLoading(true);
         getMovies(`
           {
-            allMoviedetaileds {
+            allNewmovies(filter: {title: {matches: {pattern: "${searchMovies}"}}}) {
               id
-              moviedetail
+              imdbid
+              poster
+              year
+              title
             }
           }
         `).then((res) => {
           setIsLoading(false);
-          setMovies(res?.data);
+          setMovies(res?.data?.allNewmovies);
         });
       }
     }, 1000);
@@ -44,8 +47,8 @@ export default function Home() {
         <GlobalLoading />
       ) : (
         <>
-          {movies?.allMoviedetaileds?.length ? (
-            <MoviesList movies={movies?.allMoviedetaileds} />
+          {movies?.length ? (
+            <MoviesList movies={movies} />
           ) : (
             <EmptyScreen setSearchMovies={setSearchMovies} />
           )}

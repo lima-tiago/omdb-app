@@ -1,41 +1,19 @@
 export type DetailedMovieResponse = {
-  Actors: string;
-  Awards: string;
-  BoxOffice: string;
-  Country: string;
-  DVD: string;
-  Director: string;
-  Genre: string;
-  Language: string;
-  Metascore: string;
-  Plot: string;
-  Poster: string;
-  Production: string;
-  Rated: string;
-  Ratings: {
+  id: string;
+  actors?: string;
+  director?: string;
+  genre?: string;
+  plot?: string;
+  poster?: string;
+  rated?: string;
+  ratings?: {
     Source: string;
     Value: string;
   }[];
-  Released: string;
-  Response: string;
-  Runtime: string;
-  Title: string;
-  Website: string;
-  Writer: string;
-  Year: string;
+  runtime?: string;
+  title?: string;
+  year?: string;
   imdbID: string;
-  imdbRating: string;
-  imdbVotes: string;
-};
-
-export type MoviesListResponse = {
-  id: string;
-  moviedetail: DetailedMovieResponse;
-};
-
-export type MoviesResponse = {
-  id: string;
-  allMoviedetaileds: MoviesListResponse[];
 };
 
 export async function getMovies(query: string) {

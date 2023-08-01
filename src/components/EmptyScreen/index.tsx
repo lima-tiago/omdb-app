@@ -12,12 +12,20 @@ export const EmptyScreen = ({ setSearchMovies }: EmptyScreenProps) => {
       <EmptyImage />
       <h1 className="text-white mb-2">Don't know what to search?</h1>
       <p className="text-gray">Here's an offer you can't refuse</p>
-      <button
-        className="text-white bg-[#f5f5f51f] p-4 rounded-lg my-6"
-        onClick={() => setSearchMovies('harry potter')}
-      >
-        Harry Potter
-      </button>
+      <div className="flex flex-wrap items-center justify-center gap-4 my-6">
+        <button
+          className="text-white bg-[#f5f5f51f] p-4 rounded-lg"
+          onClick={() => setSearchMovies('harry potter')}
+        >
+          Harry Potter
+        </button>
+        <button
+          className="text-white bg-[#f5f5f51f] p-4 rounded-lg"
+          onClick={() => setSearchMovies('The Fast and The Furious')}
+        >
+          The Fast and The Furious
+        </button>
+      </div>
     </div>
   );
 };
